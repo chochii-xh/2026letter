@@ -1,0 +1,173 @@
+/* 전체 설정 & 배경 이미지 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Pretendard', sans-serif;
+    /* 폴더 안에 bg.jpg가 있으면 배경으로 씁니다. 없으면 연한 갈색 */
+    background: url('bg.png') no-repeat center center fixed; 
+    background-size: cover;
+    background-color: #f4f1ea; 
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* 스크롤 방지 */
+}
+
+/* 배경이 너무 밝으면 글씨가 안 보이니 어둡게 덮어주는 막 */
+/*.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); 
+    z-index: -1;
+}*/
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+
+.hidden { display: none !important; }
+
+/* 로그인 화면 */
+#login-screen {
+    background-color: rgba(255, 255, 255, 0.3); /* 반투명 흰색 박스 */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    opacity: 0; /* 처음에는 아예 안 보이게 숨김 */
+    
+    /* 해석: 1s(1초) 기다렸다가, 2s(2초) 동안 서서히 나타나라(fadeIn) */
+    /* forwards는 애니메이션이 끝난 후 그대로(보이는 상태로) 있으라는 뜻 */
+    animation: fadeIn 2s ease-out 1s forwards;
+    /* ★ 수정된 부분 끝 ★ */;
+}
+/* 로그인 화면의 타이틀 부분 */
+#login-screen h1 {
+    font-family: "Merriweather", serif; /* 폰트 적용 */
+    font-weight: 700; /* 굵기 설정 (400은 보통, 700은 굵게, 900은 아주 굵게) */
+    color: #5d4037;
+    margin-bottom: 30px;
+}
+
+input {
+    width: 80%; padding: 12px; margin: 10px 0;
+    border: 1px solid #ccc; border-radius: 8px;
+    text-align: center; font-size: 16px;
+}
+button {
+    width: 90%; padding: 12px;
+    background-color: rgba(255, 255, 255, 1); color: #ff6b6b;
+    border: none; border-radius: 8px; font-size: 16px;
+    cursor: pointer;
+}
+.error { color: red; font-size: 13px; margin-top: 10px; }
+
+/* --- 편지 봉투 스타일 (CSS로 그린 봉투) --- */
+#envelope-screen {
+    cursor: pointer;
+    perspective: 1000px;
+    animation: zoomIn 0.5s;
+}
+
+.envelope-wrapper {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin: 0 auto;
+    background-color: #ff6b6b; /* 봉투 색상 */
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* 봉투 뚜껑 */
+.envelope-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 100px solid #ff6b6b; /* 뚜껑 색 (조금 더 진하게) */
+    transform-origin: top;
+    transition: transform 0.6s; /* 열리는 애니메이션 속도 */
+    z-index: 5;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.15));
+}
+
+/* 봉투 열릴 때 클래스 */
+.envelope-wrapper.open::before {
+    transform: rotateX(180deg); /* 뚜껑 뒤집기 */
+}
+
+/* 봉투 몸통 (삼각형 모양 만들기) */
+.envelope::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    border-left: 150px solid #ff6b6b;
+    border-right: 150px solid #ff6b6b;
+    border-top: 100px solid transparent;
+    z-index: 4;
+    border-radius: 0 0 5px 5px;
+}
+
+.click-hint {
+    color: white; margin-top: 20px; font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    animation: blink 1.5s infinite;
+}
+
+/* 편지 내용 화면 */
+/* 편지 내용 화면 (박스 틀) */
+.letter-paper {
+    background-color: rgba(255, 255, 255, 0.3); /* 글씨가 잘 보이게 배경을 좀 더 불투명하게 변경 추천 */
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    text-align: left;
+    animation: slideUp 0.8s;
+    
+    /* ★ 핵심 수정 부분 ★ */
+    max-height: 60vh;       /* 화면 높이의 60%까지만 커지게 제한 */
+    display: flex;          /* 내부 요소들을 정렬하기 위해 flex 사용 */
+    flex-direction: column; /* 세로로 나열 */
+}
+
+/* 편지 본문 (글자 들어가는 곳) */
+/* 편지 본문 (글자 들어가는 곳) */
+.content {
+    white-space: pre-wrap; 
+    line-height: 1.6; 
+    color: #444; 
+    margin: 20px 0;
+    
+    /* 스크롤 기능은 켜두기 */
+    overflow-y: auto;       
+    flex: 1;                
+    padding-right: 10px;    
+
+    /* ★ 여기서부터 스크롤바 숨기는 마법 ★ */
+    /* 파이어폭스, IE 용 */
+    scrollbar-width: none;  
+    -ms-overflow-style: none; 
+}
+
+/* ★ 크롬, 사파리, 엣지, 모바일 브라우저 용 스크롤바 숨기기 ★ */
+/* 이 코드를 .content 중괄호 }가 끝난 바로 밑에 붙여주세요 */
+.content::-webkit-scrollbar {
+    display: none; 
+}
+
+/* 애니메이션 정의 */
+@keyframes blink { 50% { opacity: 0.5; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* 편지 본문 등 나머지 스타일 */
+.content { white-space: pre-wrap; line-height: 1.6; color: #444; margin: 20px 0; }
+#recipient-name { border-bottom: 2px solid #ff6b6b; display: inline-block; padding-bottom: 5px; }
+.back-btn { background-color: rgba(255, 255, 255, 1); color: #ff6b6b; margin-top: 20px; }

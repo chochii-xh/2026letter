@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>새해복많이받으세요</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<body>
+    <div class="overlay"></div> <div class="container">
+        <div id="login-screen" class="screen">
+            <h1> 🐎HAPPY 2026🐎 </h1>
+            <p>자신의 전화번호 뒷자리를 입력하세요</p>
+            <input type="text" id="code-input" placeholder="코드 (예: 1234)" autocomplete="off">
+            <button onclick="checkCode()">확인</button>
+            <p id="error-msg" class="error hidden">없는 코드입니다.</p>
+        </div>
+
+        <div id="envelope-screen" class="screen hidden" onclick="openEnvelope()">
+            <div class="envelope-wrapper">
+                <div class="envelope">
+                    <div class="front"></div>
+                </div>
+            </div>
+            <p class="click-hint">봉투를 눌러서 열어보세요</p>
+        </div>
+
+        <div id="letter-screen" class="screen hidden">
+            <div class="letter-paper">
+                <h2 id="recipient-name">To. Name</h2>
+                <div id="letter-content" class="content">내용</div>
+                <p class="date">2026.01.11 연서가</p>
+                <button class="back-btn" onclick="goBack()">처음으로</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
