@@ -53,3 +53,4 @@ function goBack() {
     location.reload(); // 사이트 새로고침 (처음으로 돌아가기 가장 쉬운 방법)
 }
 
+
